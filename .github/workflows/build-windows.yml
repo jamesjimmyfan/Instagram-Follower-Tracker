@@ -1,0 +1,39 @@
+
+name: Build Windows Application
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "app.py"
+      - "tracker.py"
+      - "build_windows.bat"
+      - ".github/workflows/build-windows.yml"
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install PyInstaller
+        run: python -m pip install pyinstaller
+
+      - name: Build Windows executable
+        run: |
+          python -m PyInstaller --noconfirm --clean --onefile --windowed --name InstagramFollowerTracker app.py
+
+      - name: Upload Windows application
+        uses: actions/upload-artifact@v4
+        with:
+          name: InstagramFollowerTracker-Windows
+          path: dist/InstagramFollowerTracker.exe
+          if-no-files-found: error
