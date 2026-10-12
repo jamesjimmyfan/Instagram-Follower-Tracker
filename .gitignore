@@ -1,0 +1,27 @@
+# Python caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Build output
+build/
+dist/
+*.spec
+
+# Instagram exports and private local data
+inbox/
+reports/
+*.sqlite3
+*.sqlite3-*
+*.db
+*.zip
+followers*.json
+following*.json
+
+# OS/editor artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
